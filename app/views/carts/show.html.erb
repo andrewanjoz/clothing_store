@@ -1,0 +1,29 @@
+<h1>Your Cart</h1>
+<% if @cart.cart_items.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price Each</th>
+        <th>Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart.cart_items.each do |cart_item| %>
+        <tr>
+          <td><%= cart_item.product.name %></td>
+          <td><%= cart_item.quantity %></td>
+          <td>$<%= cart_item.product.price %></td>
+          <td>$<%= cart_item.product.price * cart_item.quantity %></td>
+          <td>
+            <%= link_to 'Remove', remove_item_cart_path(cart_item), method: :delete, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Your cart is empty.</p>
+<% end %>
